@@ -187,27 +187,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Blog.cs">
-      <DependentUpon>BloggingContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BloggingContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BloggingContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BloggingContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BloggingContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BloggingContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BloggingContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Post.cs">
-      <DependentUpon>BloggingContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,16 +198,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\BloggingContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BloggingContext.edmx</DependentUpon>
-      <LastGenOutput>BloggingContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\BloggingContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BloggingContext.edmx</DependentUpon>
-      <LastGenOutput>BloggingContext.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -250,13 +219,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\BloggingContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BloggingContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\BloggingContext.edmx.diagram">
-      <DependentUpon>BloggingContext.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -281,6 +243,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\ViewModels\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
