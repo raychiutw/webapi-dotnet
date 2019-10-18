@@ -6,20 +6,40 @@ using Sample.Service.Interface;
 
 namespace Sample.Service.Implement
 {
+    /// <summary>
+    /// Blog Service
+    /// </summary>
+    /// <seealso cref="Sample.Service.Interface.IBlogService" />
     public class BlogService : IBlogService
     {
+        /// <summary>
+        /// The blog repository
+        /// </summary>
         private readonly IBologRepository _blogRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlogService"/> class.
+        /// </summary>
+        /// <param name="bologRepository">The bolog repository.</param>
         public BlogService(IBologRepository bologRepository)
         {
             this._blogRepository = bologRepository;
         }
 
+        /// <summary>
+        /// 刪除 Blog
+        /// </summary>
+        /// <param name="id"></param>
         public void Remove(int id)
         {
             this._blogRepository.Remove(id);
         }
 
+        /// <summary>
+        /// 取得 Blog
+        /// </summary>
+        /// <param name="id">Blog Id</param>
+        /// <returns></returns>
         public List<BlogDto> Get(int id)
         {
             var blogs = this._blogRepository.Get(x => x.BlogId == id);
@@ -40,6 +60,10 @@ namespace Sample.Service.Implement
             return dtos;
         }
 
+        /// <summary>
+        /// 更新 Blog
+        /// </summary>
+        /// <param name="dto">Blog Dto</param>
         public void Update(BlogDto dto)
         {
             var blog = new Blog()
@@ -51,6 +75,10 @@ namespace Sample.Service.Implement
             this._blogRepository.Update(blog);
         }
 
+        /// <summary>
+        /// 新增 Blog
+        /// </summary>
+        /// <param name="dto">Blog Dto</param>
         public void Add(BlogDto dto)
         {
             var blog = new Blog()

@@ -8,26 +8,31 @@ using Sample.WebApi.Controllers.ViewModels;
 
 namespace Sample.WebApi.Controllers
 {
+    /// <summary>
+    /// Blog Controller
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     [RoutePrefix("api/blog")]
     public class BlogController : ApiController
     {
         /// <summary>
         /// The blog service
         /// </summary>
-        private IBlogService _blogService;
+        private readonly IBlogService _blogService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogController"/> class.
         /// </summary>
+        /// <param name="blogService">The blog service.</param>
         public BlogController(IBlogService blogService)
         {
             this._blogService = blogService;
         }
 
         /// <summary>
-        /// Gets the specified identifier.
+        /// 取得 Blog
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="id">Blog Id</param>
         /// <returns></returns>
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
@@ -52,6 +57,11 @@ namespace Sample.WebApi.Controllers
             return models;
         }
 
+        /// <summary>
+        /// 新增 Blog
+        /// </summary>
+        /// <param name="parameter">Blog 參數</param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Add(BlogParameter parameter)
         {
@@ -71,6 +81,11 @@ namespace Sample.WebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 刪除 Blof
+        /// </summary>
+        /// <param name="id">Blog Id</param>
+        /// <returns></returns>
         [Route("{id}")]
         [HttpDelete]
         public IHttpActionResult Remove(int id)
@@ -80,6 +95,11 @@ namespace Sample.WebApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 更新 Blog
+        /// </summary>
+        /// <param name="parameter">Blog 參數</param>
+        /// <returns></returns>
         [HttpPatch]
         public IHttpActionResult Update(BlogParameter parameter)
         {

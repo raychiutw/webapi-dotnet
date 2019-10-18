@@ -1,5 +1,8 @@
 ﻿namespace Sample.WebApi.Controllers.ViewModels
 {
+    /// <summary>
+    /// Blog ViewModel
+    /// </summary>
     public class BlogViewModel
     {
         /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Sample.WebApi.Controllers.Parameters
 {
+    /// <summary>
+    /// Blog 參數
+    /// </summary>
     public class BlogParameter
     {
         /// <summary>
