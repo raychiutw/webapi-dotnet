@@ -53,25 +53,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\Blog.cs">
+    <Compile Include="Implement\IBologRepository.cs" />
+    <Compile Include="Interface\BlogRepository.cs" />
+    <Compile Include="Models\Blog.cs">
       <DependentUpon>Blogging.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\Blogging.Context.cs">
+    <Compile Include="Models\Blogging.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Blogging.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\Blogging.cs">
+    <Compile Include="Models\Blogging.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Blogging.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\Blogging.Designer.cs">
+    <Compile Include="Models\Blogging.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Blogging.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB\Post.cs">
+    <Compile Include="Models\Post.cs">
       <DependentUpon>Blogging.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,10 +81,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implement\" />
-    <Folder Include="Interface\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Sample.Common\Sample.Common.csproj">
       <Project>{d9dad234-f420-49f8-aff6-fe3afef251d3}</Project>
@@ -90,25 +89,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="DB\Blogging.edmx">
+    <None Include="App.config" />
+    <EntityDeploy Include="Models\Blogging.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Blogging.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="DB\Blogging.edmx.diagram">
+    <None Include="Models\Blogging.edmx.diagram">
       <DependentUpon>Blogging.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB\Blogging.Context.tt">
+    <Content Include="Models\Blogging.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Blogging.edmx</DependentUpon>
       <LastGenOutput>Blogging.Context.cs</LastGenOutput>
+      <DependentUpon>Blogging.edmx</DependentUpon>
     </Content>
-    <Content Include="DB\Blogging.tt">
+    <Content Include="Models\Blogging.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Blogging.edmx</DependentUpon>
       <LastGenOutput>Blogging.cs</LastGenOutput>

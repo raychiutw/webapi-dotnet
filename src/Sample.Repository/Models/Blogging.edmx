@@ -80,7 +80,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BloggingEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
           <AssociationSet Name="FK_Post_Blog_BlogId" Association="Self.FK_Post_Blog_BlogId">
@@ -93,7 +93,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BloggingModelStoreContainer" CdmEntityContainer="BloggingEntities">
+        <EntityContainerMapping StorageEntityContainer="BloggingModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="BloggingModel.Blog">
               <MappingFragment StoreEntitySet="Blog">

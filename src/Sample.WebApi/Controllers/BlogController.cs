@@ -1,114 +1,90 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Sample.Repository.DB;
+using Sample.Common.Dto;
+using Sample.Service.Implement;
+using Sample.Service.Interface;
+using Sample.WebApi.Controllers.Parameters;
+using Sample.WebApi.Controllers.ViewModels;
 
 namespace Sample.WebApi.Controllers
 {
     public class BlogController : ApiController
     {
-        private BloggingEntities db = new BloggingEntities();
+        /// <summary>
+        /// The blog service
+        /// </summary>
+        private IBlogService _blogService;
 
-        private bool BlogExists(int id)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlogController"/> class.
+        /// </summary>
+        public BlogController()
         {
-            return db.Blogs.Count(e => e.BlogId == id) > 0;
+            this._blogService = new BlogService();
         }
 
-        protected override void Dispose(bool disposing)
+        /// <summary>
+        /// Gets the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [ResponseType(typeof(BlogViewModel))]
+        [Route("{id}")]
+        public List<BlogViewModel> Get(int id)
         {
-            if (disposing)
+            var blogs = this._blogService.Get(id);
+
+            var models = new List<BlogViewModel>();
+
+            foreach (var blog in blogs)
             {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+                var model = new BlogViewModel()
+                {
+                    BlogId = blog.BlogId,
+                    Url = blog.Url
+                };
 
-        // GET: api/Blog
-        public IQueryable<Blog> GetBlogs()
-        {
-            return db.Blogs;
-        }
-
-        // GET: api/Blog/5
-        [ResponseType(typeof(Blog))]
-        public IHttpActionResult GetBlog(int id)
-        {
-            Blog blog = db.Blogs.Find(id);
-            if (blog == null)
-            {
-                return NotFound();
+                models.Add(model);
             }
 
-            return Ok(blog);
+            return models;
         }
 
-        // PUT: api/Blog/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutBlog(int id, Blog blog)
+        [HttpPost]
+        public IHttpActionResult Add(BlogDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != blog.BlogId)
-            {
-                return BadRequest();
-            }
+            this._blogService.Add(dto);
 
-            db.Entry(blog).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BlogExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok();
         }
 
-        // POST: api/Blog
-        [ResponseType(typeof(Blog))]
-        public IHttpActionResult PostBlog(Blog blog)
+        [Route("{id}")]
+        [HttpDelete]
+        public IHttpActionResult Remove(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            this._blogService.Remove(id);
 
-            db.Blogs.Add(blog);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = blog.BlogId }, blog);
+            return Ok();
         }
 
-        // DELETE: api/Blog/5
-        [ResponseType(typeof(Blog))]
-        public IHttpActionResult DeleteBlog(int id)
+        [HttpPatch]
+        public IHttpActionResult Update(BlogParameter parameter)
         {
-            Blog blog = db.Blogs.Find(id);
-            if (blog == null)
+            var dto = new BlogDto()
             {
-                return NotFound();
-            }
+                BlogId = parameter.BlogId,
+                Url = parameter.Url
+            };
 
-            db.Blogs.Remove(blog);
-            db.SaveChanges();
+            this._blogService.Update(dto);
 
-            return Ok(blog);
+            return Ok();
         }
     }
 }

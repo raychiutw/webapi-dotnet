@@ -1,9 +1,6 @@
-﻿namespace Sample.Common.Dto
+﻿namespace Sample.WebApi.Controllers.ViewModels
 {
-    /// <summary>
-    /// Blog Query Dto
-    /// </summary>
-    public class BlogQueryDto
+    public class BlogViewModel
     {
         /// <summary>
         /// Blog 編號
@@ -13,7 +10,6 @@
         /// <summary>
         /// Blog Url
         /// </summary>
-
         public string Url { get; set; }
     }
 }

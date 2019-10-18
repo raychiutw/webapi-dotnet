@@ -7,18 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sample.Repository.DB
+namespace Sample.Repository.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Post
+    public partial class Blog
     {
-        public int PostId { get; set; }
-        public int BlogId { get; set; }
-        public string Content { get; set; }
-        public string Title { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Blog()
+        {
+            this.Posts = new HashSet<Post>();
+        }
     
-        public virtual Blog Blog { get; set; }
+        public int BlogId { get; set; }
+        public string Url { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

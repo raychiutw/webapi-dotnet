@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sample.Repository.DB
+namespace Sample.Repository.Models
 {
     using System;
     using System.Data.Entity;

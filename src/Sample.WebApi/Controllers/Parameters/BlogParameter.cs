@@ -1,9 +1,6 @@
-﻿namespace Sample.Common.Enities
+﻿namespace Sample.WebApi.Controllers.Parameters
 {
-    /// <summary>
-    /// Class BlogQuery.
-    /// </summary>
-    public class BlogQuery
+    public class BlogParameter
     {
         /// <summary>
         /// Blog 編號
@@ -13,7 +10,6 @@
         /// <summary>
         /// Blog Url
         /// </summary>
-
         public string Url { get; set; }
     }
 }

@@ -13,7 +13,6 @@
         /// <summary>
         /// Blog Url
         /// </summary>
-
         public string Url { get; set; }
     }
 }
