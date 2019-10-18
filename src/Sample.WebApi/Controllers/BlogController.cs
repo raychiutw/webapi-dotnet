@@ -2,13 +2,13 @@
 using System.Web.Http;
 using System.Web.Http.Description;
 using Sample.Common.Dto;
-using Sample.Service.Implement;
 using Sample.Service.Interface;
 using Sample.WebApi.Controllers.Parameters;
 using Sample.WebApi.Controllers.ViewModels;
 
 namespace Sample.WebApi.Controllers
 {
+    [RoutePrefix("api/blog")]
     public class BlogController : ApiController
     {
         /// <summary>
@@ -19,9 +19,9 @@ namespace Sample.WebApi.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogController"/> class.
         /// </summary>
-        public BlogController()
+        public BlogController(IBlogService blogService)
         {
-            this._blogService = new BlogService();
+            this._blogService = blogService;
         }
 
         /// <summary>
@@ -30,6 +30,7 @@ namespace Sample.WebApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [ResponseType(typeof(BlogViewModel))]
+        [HttpGet]
         [Route("{id}")]
         public List<BlogViewModel> Get(int id)
         {
@@ -52,12 +53,18 @@ namespace Sample.WebApi.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Add(BlogDto dto)
+        public IHttpActionResult Add(BlogParameter parameter)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var dto = new BlogDto()
+            {
+                BlogId = parameter.BlogId,
+                Url = parameter.Url
+            };
 
             this._blogService.Add(dto);
 

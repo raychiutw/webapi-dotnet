@@ -1,5 +1,8 @@
 using System;
-
+using Sample.Repository.Implement;
+using Sample.Repository.Interface;
+using Sample.Service.Implement;
+using Sample.Service.Interface;
 using Unity;
 
 namespace Sample.WebApi
@@ -10,6 +13,7 @@ namespace Sample.WebApi
     public static class UnityConfig
     {
         #region Unity Container
+
         private static Lazy<IUnityContainer> container =
           new Lazy<IUnityContainer>(() =>
           {
@@ -22,7 +26,8 @@ namespace Sample.WebApi
         /// Configured Unity Container.
         /// </summary>
         public static IUnityContainer Container => container.Value;
-        #endregion
+
+        #endregion Unity Container
 
         /// <summary>
         /// Registers the type mappings with the Unity container.
@@ -41,7 +46,8 @@ namespace Sample.WebApi
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<IBlogService, BlogService>();
+            container.RegisterType<IBologRepository, BlogRepository>();
         }
     }
 }

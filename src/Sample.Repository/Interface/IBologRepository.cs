@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Sample.Repository.Models;
 
-namespace Sample.Repository.Implement
+namespace Sample.Repository.Interface
 {
     public interface IBologRepository
     {

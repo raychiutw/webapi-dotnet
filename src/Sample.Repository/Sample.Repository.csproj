@@ -53,8 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implement\IBologRepository.cs" />
-    <Compile Include="Interface\BlogRepository.cs" />
+    <Compile Include="Interface\IBologRepository.cs" />
+    <Compile Include="Implement\BlogRepository.cs" />
     <Compile Include="Models\Blog.cs">
       <DependentUpon>Blogging.tt</DependentUpon>
     </Compile>

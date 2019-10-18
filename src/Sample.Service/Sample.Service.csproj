@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implement\IBlogService.cs" />
-    <Compile Include="Interface\BlogService.cs" />
+    <Compile Include="Interface\IBlogService.cs" />
+    <Compile Include="Implement\BlogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -50,6 +50,10 @@
     <ProjectReference Include="..\Sample.Common\Sample.Common.csproj">
       <Project>{D9DAD234-F420-49F8-AFF6-FE3AFEF251D3}</Project>
       <Name>Sample.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sample.Repository\Sample.Repository.csproj">
+      <Project>{2D5C9B27-A2D4-4CD3-87AF-836ABCF52E62}</Project>
+      <Name>Sample.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
