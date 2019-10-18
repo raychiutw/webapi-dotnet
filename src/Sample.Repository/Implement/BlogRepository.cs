@@ -14,7 +14,7 @@ namespace Sample.Repository.Implement
     /// <seealso cref="System.IDisposable" />
     public class BlogRepository : IBologRepository, IDisposable
     {
-        private BloggingEntities _db;
+        private readonly BloggingEntities _db;
 
         private bool _disposed = false;
 
