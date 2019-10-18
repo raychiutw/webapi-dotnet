@@ -13,7 +13,7 @@ namespace Sample.Service.Interface
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>
-        List<BlogDto> Get(int id);
+        BlogDto Get(int id);
 
         /// <summary>
         /// 取得所有 Blog

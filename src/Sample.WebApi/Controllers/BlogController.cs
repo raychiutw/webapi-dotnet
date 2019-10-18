@@ -37,24 +37,17 @@ namespace Sample.WebApi.Controllers
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
         [Route("{id}")]
-        public List<BlogViewModel> Get(int id)
+        public BlogViewModel Get(int id)
         {
-            var blogs = this._blogService.Get(id);
+            var blog = this._blogService.Get(id);
 
-            var models = new List<BlogViewModel>();
-
-            foreach (var blog in blogs)
+            var model = new BlogViewModel()
             {
-                var model = new BlogViewModel()
-                {
-                    BlogId = blog.BlogId,
-                    Url = blog.Url
-                };
+                BlogId = blog.BlogId,
+                Url = blog.Url
+            };
 
-                models.Add(model);
-            }
-
-            return models;
+            return model;
         }
 
         /// <summary>

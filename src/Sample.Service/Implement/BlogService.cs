@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sample.Common.Dto;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
@@ -40,24 +41,17 @@ namespace Sample.Service.Implement
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>
-        public List<BlogDto> Get(int id)
+        public BlogDto Get(int id)
         {
-            var blogs = this._blogRepository.Get(x => x.BlogId == id);
-
-            var dtos = new List<BlogDto>();
-
-            foreach (var blog in blogs)
+            var blog = this._blogRepository.Get(x => x.BlogId == id)
+                                            .FirstOrDefault(); ;
+            var dto = new BlogDto()
             {
-                var dto = new BlogDto()
-                {
-                    BlogId = blog.BlogId,
-                    Url = blog.Url
-                };
+                BlogId = blog.BlogId,
+                Url = blog.Url
+            };
 
-                dtos.Add(dto);
-            }
-
-            return dtos;
+            return dto;
         }
 
         /// <summary>
