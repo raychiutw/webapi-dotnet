@@ -58,6 +58,33 @@ namespace Sample.WebApi.Controllers
         }
 
         /// <summary>
+        /// 取得 Blog
+        /// </summary>
+        /// <param name="id">Blog Id</param>
+        /// <returns></returns>
+        [ResponseType(typeof(BlogViewModel))]
+        [HttpGet]
+        public List<BlogViewModel> GetAll()
+        {
+            var blogs = this._blogService.GetAll();
+
+            var models = new List<BlogViewModel>();
+
+            foreach (var blog in blogs)
+            {
+                var model = new BlogViewModel()
+                {
+                    BlogId = blog.BlogId,
+                    Url = blog.Url
+                };
+
+                models.Add(model);
+            }
+
+            return models;
+        }
+
+        /// <summary>
         /// 新增 Blog
         /// </summary>
         /// <param name="parameter">Blog 參數</param>

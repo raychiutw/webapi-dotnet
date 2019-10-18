@@ -16,6 +16,12 @@ namespace Sample.Service.Interface
         List<BlogDto> Get(int id);
 
         /// <summary>
+        /// 取得所有 Blog
+        /// </summary>
+        /// <returns></returns>
+        List<BlogDto> GetAll();
+
+        /// <summary>
         /// 更新 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>

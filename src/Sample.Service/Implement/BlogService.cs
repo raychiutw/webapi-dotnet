@@ -61,6 +61,30 @@ namespace Sample.Service.Implement
         }
 
         /// <summary>
+        /// 取得所有 Blog
+        /// </summary>
+        /// <returns></returns>
+        public List<BlogDto> GetAll()
+        {
+            var blogs = this._blogRepository.Get(x => true);
+
+            var dtos = new List<BlogDto>();
+
+            foreach (var blog in blogs)
+            {
+                var dto = new BlogDto()
+                {
+                    BlogId = blog.BlogId,
+                    Url = blog.Url
+                };
+
+                dtos.Add(dto);
+            }
+
+            return dtos;
+        }
+
+        /// <summary>
         /// 更新 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>

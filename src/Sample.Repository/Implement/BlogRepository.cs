@@ -27,16 +27,6 @@ namespace Sample.Repository.Implement
         }
 
         /// <summary>
-        /// Blogs the exists.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        private bool BlogExists(int id)
-        {
-            return this._db.Blogs.Count(e => e.BlogId == id) > 0;
-        }
-
-        /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
@@ -83,6 +73,15 @@ namespace Sample.Repository.Implement
         public IQueryable<Blog> Get(Expression<Func<Blog, bool>> predicate)
         {
             return this._db.Blogs.Where(predicate);
+        }
+
+        /// <summary>
+        /// 取得所有 Blog
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<Blog> GetAll()
+        {
+            return this._db.Blogs;
         }
 
         /// <summary>

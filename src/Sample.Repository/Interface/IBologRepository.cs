@@ -18,6 +18,12 @@ namespace Sample.Repository.Interface
         IQueryable<Blog> Get(Expression<Func<Blog, bool>> predicate);
 
         /// <summary>
+        /// 取得所有 Blog
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<Blog> GetAll();
+
+        /// <summary>
         /// 更新 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
