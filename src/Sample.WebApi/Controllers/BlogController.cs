@@ -106,8 +106,8 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>
-        [Route("{id}")]
         [HttpDelete]
+        [Route("{id}")]
         public IHttpActionResult Remove(int id)
         {
             this._blogService.Remove(id);
