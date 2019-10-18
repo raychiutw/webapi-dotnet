@@ -60,7 +60,7 @@ namespace Sample.Service.Implement
         /// <returns></returns>
         public List<BlogDto> GetAll()
         {
-            var blogs = this._blogRepository.Get(x => true);
+            var blogs = this._blogRepository.GetAll();
 
             var dtos = new List<BlogDto>();
 
