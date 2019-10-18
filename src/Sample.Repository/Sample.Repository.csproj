@@ -89,7 +89,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <EntityDeploy Include="Models\Blogging.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Blogging.Designer.cs</LastGenOutput>
