@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Sample.Common.Dto;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
@@ -43,8 +42,7 @@ namespace Sample.Service.Implement
         /// <returns></returns>
         public BlogDto Get(int id)
         {
-            var blog = this._blogRepository.Get(x => x.BlogId == id)
-                                            .FirstOrDefault(); ;
+            var blog = this._blogRepository.Get(id); ;
             var dto = new BlogDto()
             {
                 BlogId = blog.BlogId,
@@ -60,7 +58,7 @@ namespace Sample.Service.Implement
         /// <returns></returns>
         public List<BlogDto> GetAll()
         {
-            var blogs = this._blogRepository.Get(x => true);
+            var blogs = this._blogRepository.GetAll();
 
             var dtos = new List<BlogDto>();
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using Sample.Repository.Models;
 
 namespace Sample.Repository.Interface
@@ -13,9 +11,9 @@ namespace Sample.Repository.Interface
         /// <summary>
         /// 取得 Blog
         /// </summary>
-        /// <param name="predicate">查詢條件</param>
+        /// <param name="id">Blog Id</param>
         /// <returns></returns>
-        IQueryable<Blog> Get(Expression<Func<Blog, bool>> predicate);
+        Blog Get(int id);
 
         /// <summary>
         /// 取得所有 Blog

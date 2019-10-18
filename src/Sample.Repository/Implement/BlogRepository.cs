@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
 
@@ -68,11 +67,11 @@ namespace Sample.Repository.Implement
         /// <summary>
         /// 取得 Blog
         /// </summary>
-        /// <param name="predicate">查詢條件</param>
+        /// <param name="id">Blog Id</param>
         /// <returns></returns>
-        public IQueryable<Blog> Get(Expression<Func<Blog, bool>> predicate)
+        public Blog Get(int id)
         {
-            return this._db.Blogs.Where(predicate);
+            return this._db.Blogs.Where(x => x.BlogId == id).FirstOrDefault();
         }
 
         /// <summary>
