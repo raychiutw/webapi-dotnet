@@ -1,3 +1,5 @@
+using System;
+using ExpectedObjects;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
@@ -44,7 +46,26 @@ namespace Sample.Service.Test
             var actual = sut.Get(blogId);
 
             // assert
-            actual.Should().Be(expected);
+            actual.Should().NotBeNull();
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
+
+        [TestMethod()]
+        public void Remove_傳入id_0_應回傳參數錯誤()
+        {
+            // arrange
+            var blogId = 0;
+            var expectedMessage = "參數錯誤";
+
+            this._blogRepository.Remove(blogId);
+            var sut = new BlogService(this._blogRepository);
+
+            // act
+            Action act = () => sut.Remove(blogId);
+
+            // assert
+            act.Should().Throw<ArgumentException>()
+                .WithMessage(expectedMessage);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sample.Common.Dto;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
@@ -32,6 +33,11 @@ namespace Sample.Service.Implement
         /// <param name="id"></param>
         public void Remove(int id)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("參數錯誤");
+            }
+
             this._blogRepository.Remove(id);
         }
 
