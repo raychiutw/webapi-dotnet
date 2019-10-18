@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\BlogDto.cs" />
+    <Compile Include="Dto\BlogQueryDto.cs" />
+    <Compile Include="Enities\Blog.cs" />
+    <Compile Include="Enities\BlogQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
