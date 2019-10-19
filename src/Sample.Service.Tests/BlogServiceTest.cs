@@ -25,7 +25,7 @@ namespace Sample.Service.Test
         }
 
         [TestMethod]
-        [Owner("F4497")]
+        [Owner("Ray Chiu")]
         [TestCategory("BlogService")]
         [TestProperty("BlogService", "Get")]
         public void Get_傳入BlogId_4_應該要為raychiu_url()
@@ -56,6 +56,9 @@ namespace Sample.Service.Test
         }
 
         [TestMethod()]
+        [Owner("Ray Chiu")]
+        [TestCategory("BlogService")]
+        [TestProperty("BlogService", "Remove")]
         public void Remove_傳入id_0_應回傳參數錯誤()
         {
             // arrange
@@ -73,6 +76,49 @@ namespace Sample.Service.Test
             // assert
             act.Should().Throw<ArgumentException>()
                 .WithMessage(expectedMessage);
+        }
+
+        [TestMethod()]
+        [Owner("Ray Chiu")]
+        [TestCategory("BlogService")]
+        [TestProperty("BlogService", "Remove")]
+        public void Remove_傳入id_0_應沒有寫入Log()
+        {
+            // arrange
+            var blogId = 0;
+
+            this._blogRepository.Remove(blogId);
+            var sut = new BlogService(
+                this._blogRepository,
+                this._log);
+
+            // act
+            var actual = sut.Remove(blogId);
+
+            // assert
+            //this._log.Received(1).Save(Arg.Is<string>(x => x.Contains(blogId.ToString())));
+            this._log.DidNotReceive();
+        }
+
+        [TestMethod()]
+        [Owner("Ray Chiu")]
+        [TestCategory("BlogService")]
+        [TestProperty("BlogService", "Remove")]
+        public void Remove_傳入id_4_應寫入Log()
+        {
+            // arrange
+            var blogId = 0;
+
+            this._blogRepository.Remove(blogId);
+            var sut = new BlogService(
+                this._blogRepository,
+                this._log);
+
+            // act
+            var actual = sut.Remove(blogId);
+
+            // assert
+            this._log.Received(1).Save(Arg.Is<string>(x => x.Contains(blogId.ToString())));
         }
     }
 }
