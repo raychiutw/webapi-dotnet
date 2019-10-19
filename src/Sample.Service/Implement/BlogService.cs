@@ -19,26 +19,41 @@ namespace Sample.Service.Implement
         private readonly IBologRepository _blogRepository;
 
         /// <summary>
+        /// The log
+        /// </summary>
+        private readonly ILog _log;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BlogService"/> class.
         /// </summary>
         /// <param name="bologRepository">The bolog repository.</param>
-        public BlogService(IBologRepository bologRepository)
+        public BlogService(
+            IBologRepository bologRepository,
+            ILog log)
         {
             this._blogRepository = bologRepository;
+            this._log = log;
         }
 
         /// <summary>
         /// 刪除 Blog
         /// </summary>
         /// <param name="id"></param>
-        public void Remove(int id)
+        public bool Remove(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("參數錯誤");
             }
 
-            this._blogRepository.Remove(id);
+            var status = this._blogRepository.Remove(id);
+
+            if (status)
+            {
+                this._log.Save($"Blog Id : {id} 已刪除");
+            }
+
+            return status;
         }
 
         /// <summary>
@@ -54,6 +69,8 @@ namespace Sample.Service.Implement
                 BlogId = blog.BlogId,
                 Url = blog.Url
             };
+
+            this._log.Save($"Blog Id : {id} 已取得");
 
             return dto;
         }
@@ -86,7 +103,7 @@ namespace Sample.Service.Implement
         /// 更新 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        public void Update(BlogDto dto)
+        public bool Update(BlogDto dto)
         {
             var blog = new Blog()
             {
@@ -94,14 +111,21 @@ namespace Sample.Service.Implement
                 Url = dto.Url
             };
 
-            this._blogRepository.Update(blog);
+            var status = this._blogRepository.Update(blog);
+
+            if (status)
+            {
+                this._log.Save($"Blog Id : {blog.BlogId} 已更新");
+            }
+
+            return status;
         }
 
         /// <summary>
         /// 新增 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        public void Add(BlogDto dto)
+        public bool Add(BlogDto dto)
         {
             var blog = new Blog()
             {
@@ -109,7 +133,14 @@ namespace Sample.Service.Implement
                 Url = dto.Url
             };
 
-            this._blogRepository.Add(blog);
+            var status = this._blogRepository.Add(blog);
+
+            if (status)
+            {
+                this._log.Save($"Blog Id : {blog.BlogId} 已新增");
+            }
+
+            return status;
         }
     }
 }

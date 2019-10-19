@@ -52,7 +52,7 @@ namespace Sample.Repository.Implement
         /// </summary>
         /// <param name="id"></param>
         /// <exception cref="Exception">Not fund blog</exception>
-        public void Remove(int id)
+        public bool Remove(int id)
         {
             Blog blog = this._db.Blogs.Find(id);
             if (blog == null)
@@ -61,7 +61,9 @@ namespace Sample.Repository.Implement
             }
 
             this._db.Blogs.Remove(blog);
-            this._db.SaveChanges();
+            var count = this._db.SaveChanges();
+
+            return count > 0 ? true : false;
         }
 
         /// <summary>
@@ -87,9 +89,12 @@ namespace Sample.Repository.Implement
         /// 更新 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
-        public void Update(Blog blog)
+        public bool Update(Blog blog)
         {
             this._db.Entry(blog).State = EntityState.Modified;
+            var count = this._db.SaveChanges();
+
+            return count > 0 ? true : false;
         }
 
         /// <summary>
@@ -105,10 +110,12 @@ namespace Sample.Repository.Implement
         /// 新增 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
-        public void Add(Blog blog)
+        public bool Add(Blog blog)
         {
             this._db.Blogs.Add(blog);
-            this._db.SaveChanges();
+            var count = this._db.SaveChanges();
+
+            return count > 0 ? true : false;
         }
     }
 }

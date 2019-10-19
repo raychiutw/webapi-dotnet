@@ -48,6 +48,7 @@ namespace Sample.WebApi
             // TODO: Register your type's mappings here.
             container.RegisterType<IBlogService, BlogService>();
             container.RegisterType<IBologRepository, BlogRepository>();
+            container.RegisterType<ILog, ConsoleLog>();
         }
     }
 }

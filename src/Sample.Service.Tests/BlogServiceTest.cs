@@ -7,6 +7,7 @@ using Sample.Common.Dto;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
 using Sample.Service.Implement;
+using Sample.Service.Interface;
 
 namespace Sample.Service.Test
 {
@@ -14,11 +15,13 @@ namespace Sample.Service.Test
     public class BlogServerTest
     {
         private IBologRepository _blogRepository;
+        private ILog _log;
 
         [TestInitialize]
         public void TestInitialize()
         {
             this._blogRepository = Substitute.For<IBologRepository>();
+            this._log = Substitute.For<ILog>();
         }
 
         [TestMethod]
@@ -34,7 +37,9 @@ namespace Sample.Service.Test
             var blog = new Blog() { BlogId = 4, Url = "https://raychiutw.github.io/" };
 
             this._blogRepository.Get(blogId).Returns(blog);
-            var sut = new BlogService(this._blogRepository);
+            var sut = new BlogService(
+                this._blogRepository,
+                this._log);
 
             var expected = new BlogDto()
             {
@@ -58,7 +63,9 @@ namespace Sample.Service.Test
             var expectedMessage = "°Ñ¼Æ¿ù»~";
 
             this._blogRepository.Remove(blogId);
-            var sut = new BlogService(this._blogRepository);
+            var sut = new BlogService(
+                this._blogRepository,
+                this._log);
 
             // act
             Action act = () => sut.Remove(blogId);

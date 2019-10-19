@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implement\ConsoleLog.cs" />
+    <Compile Include="Interface\ILog.cs" />
     <Compile Include="Interface\IBlogService.cs" />
     <Compile Include="Implement\BlogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
