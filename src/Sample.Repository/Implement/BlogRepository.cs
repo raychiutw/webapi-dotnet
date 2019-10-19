@@ -91,6 +91,7 @@ namespace Sample.Repository.Implement
         public void Update(Blog blog)
         {
             this._db.Entry(blog).State = EntityState.Modified;
+            this._db.SaveChanges();
         }
 
         /// <summary>
