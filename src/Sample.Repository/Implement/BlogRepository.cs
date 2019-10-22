@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
 
@@ -70,18 +70,18 @@ namespace Sample.Repository.Implement
         /// </summary>
         /// <param name="predicate">查詢條件</param>
         /// <returns></returns>
-        public IQueryable<Blog> Get(Expression<Func<Blog, bool>> predicate)
+        public IEnumerable<Blog> Get(Func<Blog, bool> predicate)
         {
-            return this._db.Blogs.Where(predicate);
+            return this._db.Blogs.Where(predicate).AsEnumerable();
         }
 
         /// <summary>
         /// 取得所有 Blog
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Blog> GetAll()
+        public IEnumerable<Blog> GetAll()
         {
-            return this._db.Blogs;
+            return this._db.Blogs.AsEnumerable();
         }
 
         /// <summary>

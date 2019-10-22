@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 using Sample.Repository.Models;
 
 namespace Sample.Repository.Interface
@@ -15,13 +14,13 @@ namespace Sample.Repository.Interface
         /// </summary>
         /// <param name="predicate">查詢條件</param>
         /// <returns></returns>
-        IQueryable<Blog> Get(Expression<Func<Blog, bool>> predicate);
+        IEnumerable<Blog> Get(Func<Blog, bool> predicate);
 
         /// <summary>
         /// 取得所有 Blog
         /// </summary>
         /// <returns></returns>
-        IQueryable<Blog> GetAll();
+        IEnumerable<Blog> GetAll();
 
         /// <summary>
         /// 更新 Blog

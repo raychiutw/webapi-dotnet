@@ -1,12 +1,15 @@
 using System;
+using System.Web.Configuration;
 using AutoMapper;
 using Sample.Repository.Implement;
+using Sample.Repository.Infrastructure;
 using Sample.Repository.Interface;
 using Sample.Service.Implement;
 using Sample.Service.Infrastructure;
 using Sample.Service.Interface;
 using Sample.WebApi.Infrastructure;
 using Unity;
+using Unity.Injection;
 
 namespace Sample.WebApi
 {
@@ -50,7 +53,11 @@ namespace Sample.WebApi
 
             // TODO: Register your type's mappings here.
             container.RegisterType<IBlogService, BlogService>();
-            container.RegisterType<IBologRepository, BlogRepository>();
+            container.RegisterType<IBologRepository, BlogRepositoryDapper>();
+
+            // Db ConnectionString
+            var connectionSting = WebConfigurationManager.ConnectionStrings["Blogging"].ConnectionString;
+            container.RegisterType<IDatabaseConstants, DatabaseConstants>(new InjectionConstructor(connectionSting));
 
             // AutoMapper Register
             var config = new MapperConfiguration(cfg =>
