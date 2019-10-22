@@ -21,6 +21,9 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         private readonly IBlogService _blogService;
 
+        /// <summary>
+        /// The mapper
+        /// </summary>
         private readonly IMapper _mapper;
 
         /// <summary>

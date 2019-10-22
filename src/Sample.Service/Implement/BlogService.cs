@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Sample.Common.Dto;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
@@ -19,12 +20,20 @@ namespace Sample.Service.Implement
         private readonly IBologRepository _blogRepository;
 
         /// <summary>
+        /// The mapper
+        /// </summary>
+        private readonly IMapper _mapper;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BlogService"/> class.
         /// </summary>
         /// <param name="bologRepository">The bolog repository.</param>
-        public BlogService(IBologRepository bologRepository)
+        public BlogService(
+            IBologRepository bologRepository,
+            IMapper mapper)
         {
             this._blogRepository = bologRepository;
+            this._mapper = mapper;
         }
 
         /// <summary>
@@ -44,12 +53,9 @@ namespace Sample.Service.Implement
         public BlogDto Get(int id)
         {
             var blog = this._blogRepository.Get(x => x.BlogId == id)
-                                            .FirstOrDefault(); ;
-            var dto = new BlogDto()
-            {
-                BlogId = blog.BlogId,
-                Url = blog.Url
-            };
+                                            .FirstOrDefault();
+
+            var dto = this._mapper.Map<BlogDto>(blog);
 
             return dto;
         }
@@ -62,18 +68,7 @@ namespace Sample.Service.Implement
         {
             var blogs = this._blogRepository.GetAll();
 
-            var dtos = new List<BlogDto>();
-
-            foreach (var blog in blogs)
-            {
-                var dto = new BlogDto()
-                {
-                    BlogId = blog.BlogId,
-                    Url = blog.Url
-                };
-
-                dtos.Add(dto);
-            }
+            var dtos = this._mapper.Map<List<BlogDto>>(blogs);
 
             return dtos;
         }
@@ -84,11 +79,7 @@ namespace Sample.Service.Implement
         /// <param name="dto">Blog Dto</param>
         public void Update(BlogDto dto)
         {
-            var blog = new Blog()
-            {
-                BlogId = dto.BlogId,
-                Url = dto.Url
-            };
+            var blog = this._mapper.Map<Blog>(dto);
 
             this._blogRepository.Update(blog);
         }
@@ -99,11 +90,7 @@ namespace Sample.Service.Implement
         /// <param name="dto">Blog Dto</param>
         public void Add(BlogDto dto)
         {
-            var blog = new Blog()
-            {
-                BlogId = dto.BlogId,
-                Url = dto.Url
-            };
+            var blog = this._mapper.Map<Blog>(dto);
 
             this._blogRepository.Add(blog);
         }

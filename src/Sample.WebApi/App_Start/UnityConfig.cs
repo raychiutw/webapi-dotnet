@@ -3,6 +3,7 @@ using AutoMapper;
 using Sample.Repository.Implement;
 using Sample.Repository.Interface;
 using Sample.Service.Implement;
+using Sample.Service.Infrastructure;
 using Sample.Service.Interface;
 using Sample.WebApi.Infrastructure;
 using Unity;
@@ -55,6 +56,7 @@ namespace Sample.WebApi
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ControllerProfile());
+                cfg.AddProfile(new ServiceProfile());
             });
 
             container.RegisterInstance<IMapper>(config.CreateMapper());
