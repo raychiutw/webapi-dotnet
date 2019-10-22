@@ -35,7 +35,7 @@ namespace Sample.Repository.Implement
 
             using (var connection = this._database.GetConnection())
             {
-                var mails = connection.Execute(
+                connection.Execute(
                     sql,
                     new
                     {
@@ -91,13 +91,13 @@ namespace Sample.Repository.Implement
 
             using (var connection = this._database.GetConnection())
             {
-                var mails = connection.Execute(
-                    sql,
-                    new
-                    {
-                        Id = blog.BlogId,
-                        Url = blog.Url
-                    });
+                connection.Execute(
+                     sql,
+                     new
+                     {
+                         Id = blog.BlogId,
+                         Url = blog.Url
+                     });
             }
         }
 
@@ -114,7 +114,7 @@ namespace Sample.Repository.Implement
 
             using (var connection = this._database.GetConnection())
             {
-                var mails = connection.Execute(
+                connection.Execute(
                     sql,
                     new
                     {
