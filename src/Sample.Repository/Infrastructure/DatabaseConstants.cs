@@ -23,7 +23,6 @@ namespace Sample.Repository.Infrastructure
         /// <summary>
         /// 取得連線
         /// </summary>
-        /// <param name="connectionString">連線字串</param>
         /// <returns></returns>
         public DbConnection GetConnection()
         {
