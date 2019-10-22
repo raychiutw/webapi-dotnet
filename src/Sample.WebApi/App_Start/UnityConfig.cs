@@ -62,8 +62,8 @@ namespace Sample.WebApi
             // AutoMapper Register
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new ControllerProfile());
-                cfg.AddProfile(new ServiceProfile());
+                cfg.AddProfile<ControllerProfile>();
+                cfg.AddProfile<ServiceProfile>();
             });
 
             container.RegisterInstance<IMapper>(config.CreateMapper());
