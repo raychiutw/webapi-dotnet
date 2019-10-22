@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
+using AutoMapper;
 using Sample.Common.Dto;
 using Sample.Service.Interface;
 using Sample.WebApi.Controllers.Parameters;
@@ -20,13 +21,18 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         private readonly IBlogService _blogService;
 
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogController"/> class.
         /// </summary>
         /// <param name="blogService">The blog service.</param>
-        public BlogController(IBlogService blogService)
+        public BlogController(
+            IBlogService blogService,
+            IMapper mapper)
         {
             this._blogService = blogService;
+            this._mapper = mapper;
         }
 
         /// <summary>
@@ -39,15 +45,11 @@ namespace Sample.WebApi.Controllers
         [Route("{id}")]
         public BlogViewModel Get(int id)
         {
-            var blog = this._blogService.Get(id);
+            var dto = this._blogService.Get(id);
 
-            var model = new BlogViewModel()
-            {
-                BlogId = blog.BlogId,
-                Url = blog.Url
-            };
+            var viewModel = this._mapper.Map<BlogViewModel>(dto);
 
-            return model;
+            return viewModel;
         }
 
         /// <summary>
@@ -59,22 +61,11 @@ namespace Sample.WebApi.Controllers
         [HttpGet]
         public List<BlogViewModel> GetAll()
         {
-            var blogs = this._blogService.GetAll();
+            var dtos = this._blogService.GetAll();
 
-            var models = new List<BlogViewModel>();
+            var viewModels = this._mapper.Map<List<BlogViewModel>>(dtos);
 
-            foreach (var blog in blogs)
-            {
-                var model = new BlogViewModel()
-                {
-                    BlogId = blog.BlogId,
-                    Url = blog.Url
-                };
-
-                models.Add(model);
-            }
-
-            return models;
+            return viewModels;
         }
 
         /// <summary>
@@ -119,11 +110,7 @@ namespace Sample.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var dto = new BlogDto()
-            {
-                BlogId = parameter.BlogId,
-                Url = parameter.Url
-            };
+            var dto = this._mapper.Map<BlogDto>(parameter);
 
             this._blogService.Add(dto);
 
@@ -152,11 +139,7 @@ namespace Sample.WebApi.Controllers
         [HttpPatch]
         public IHttpActionResult Update(BlogParameter parameter)
         {
-            var dto = new BlogDto()
-            {
-                BlogId = parameter.BlogId,
-                Url = parameter.Url
-            };
+            var dto = this._mapper.Map<BlogDto>(parameter);
 
             this._blogService.Update(dto);
 

@@ -1,8 +1,10 @@
 using System;
+using AutoMapper;
 using Sample.Repository.Implement;
 using Sample.Repository.Interface;
 using Sample.Service.Implement;
 using Sample.Service.Interface;
+using Sample.WebApi.Infrastructure;
 using Unity;
 
 namespace Sample.WebApi
@@ -48,6 +50,14 @@ namespace Sample.WebApi
             // TODO: Register your type's mappings here.
             container.RegisterType<IBlogService, BlogService>();
             container.RegisterType<IBologRepository, BlogRepository>();
+
+            // AutoMapper Register
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new ControllerProfile());
+            });
+
+            container.RegisterInstance<IMapper>(config.CreateMapper());
         }
     }
 }
