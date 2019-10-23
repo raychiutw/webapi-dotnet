@@ -78,7 +78,7 @@ namespace Sample.WebApi.Controllers
         /// <returns></returns>
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
-        public List<BlogViewModel> GetRange([FromUri]BlogQueryParameter parameter)
+        public IEnumerable<BlogViewModel> GetRange([FromUri]BlogQueryParameter parameter)
         {
             var query = this._mapper.Map<BlogQueryDto>(parameter);
 

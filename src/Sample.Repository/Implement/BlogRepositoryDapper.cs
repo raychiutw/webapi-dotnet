@@ -29,18 +29,20 @@ namespace Sample.Repository.Implement
         /// 刪除 Blog
         /// </summary>
         /// <param name="id"></param>
-        public void Remove(int id)
+        public bool Remove(int id)
         {
             var sql = "DELETE FROM Blog WHERE BlogId = @Id";
 
             using (var connection = this._database.GetConnection())
             {
-                connection.Execute(
-                    sql,
-                    new
-                    {
-                        Id = id
-                    });
+                var count = connection.Execute(
+                     sql,
+                     new
+                     {
+                         Id = id
+                     });
+
+                return count > 0 ? true : false;
             }
         }
 
@@ -83,7 +85,7 @@ namespace Sample.Repository.Implement
         /// 更新 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
-        public void Update(Blog blog)
+        public bool Update(Blog blog)
         {
             var sql = @"UPDATE Blog
                         SET Url = @Url
@@ -91,13 +93,15 @@ namespace Sample.Repository.Implement
 
             using (var connection = this._database.GetConnection())
             {
-                connection.Execute(
-                     sql,
-                     new
-                     {
-                         Id = blog.BlogId,
-                         Url = blog.Url
-                     });
+                var count = connection.Execute(
+                      sql,
+                      new
+                      {
+                          Id = blog.BlogId,
+                          Url = blog.Url
+                      });
+
+                return count > 0 ? true : false;
             }
         }
 
@@ -105,7 +109,7 @@ namespace Sample.Repository.Implement
         /// 新增 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
-        public void Add(Blog blog)
+        public bool Add(Blog blog)
         {
             var sql = @"INSERT INTO Blog
                         (BlogId, Url)
@@ -114,13 +118,15 @@ namespace Sample.Repository.Implement
 
             using (var connection = this._database.GetConnection())
             {
-                connection.Execute(
-                    sql,
-                    new
-                    {
-                        Id = blog.BlogId,
-                        Url = blog.Url
-                    });
+                var count = connection.Execute(
+                     sql,
+                     new
+                     {
+                         Id = blog.BlogId,
+                         Url = blog.Url
+                     });
+
+                return count > 0 ? true : false;
             }
         }
     }

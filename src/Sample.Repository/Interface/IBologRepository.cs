@@ -26,18 +26,18 @@ namespace Sample.Repository.Interface
         /// 更新 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
-        void Update(Blog blog);
+        bool Update(Blog blog);
 
         /// <summary>
         /// 新增 Blog
         /// </summary>
         /// <param name="blog">Blog Entity</param>
-        void Add(Blog blog);
+        bool Add(Blog blog);
 
         /// <summary>
         /// 刪除 Blog
         /// </summary>
         /// <param name="blog">Blog Id</param>
-        void Remove(int id);
+        bool Remove(int id);
     }
 }

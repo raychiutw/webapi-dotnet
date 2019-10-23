@@ -40,9 +40,9 @@ namespace Sample.Service.Implement
         /// 刪除 Blog
         /// </summary>
         /// <param name="id"></param>
-        public void Remove(int id)
+        public bool Remove(int id)
         {
-            this._blogRepository.Remove(id);
+            return this._blogRepository.Remove(id);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Sample.Service.Implement
         /// 取得所有 Blog
         /// </summary>
         /// <returns></returns>
-        public List<BlogDto> GetAll()
+        public IEnumerable<BlogDto> GetAll()
         {
             var blogs = this._blogRepository.GetAll();
 
@@ -77,22 +77,22 @@ namespace Sample.Service.Implement
         /// 更新 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        public void Update(BlogDto dto)
+        public bool Update(BlogDto dto)
         {
             var blog = this._mapper.Map<Blog>(dto);
 
-            this._blogRepository.Update(blog);
+            return this._blogRepository.Update(blog);
         }
 
         /// <summary>
         /// 新增 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        public void Add(BlogDto dto)
+        public bool Add(BlogDto dto)
         {
             var blog = this._mapper.Map<Blog>(dto);
 
-            this._blogRepository.Add(blog);
+            return this._blogRepository.Add(blog);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Sample.Service.Implement
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public List<BlogDto> GetRange(BlogQueryDto dto)
+        public IEnumerable<BlogDto> GetRange(BlogQueryDto dto)
         {
             var blogs = this._blogRepository.GetAll();
 

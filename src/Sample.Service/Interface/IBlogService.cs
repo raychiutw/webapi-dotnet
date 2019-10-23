@@ -19,30 +19,30 @@ namespace Sample.Service.Interface
         /// 取得所有 Blog
         /// </summary>
         /// <returns></returns>
-        List<BlogDto> GetAll();
+        IEnumerable<BlogDto> GetAll();
 
         /// <summary>
         /// 取得特定數量 Blog
         /// </summary>
         /// <returns></returns>
-        List<BlogDto> GetRange(BlogQueryDto dto);
+        IEnumerable<BlogDto> GetRange(BlogQueryDto dto);
 
         /// <summary>
         /// 更新 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        void Update(BlogDto dto);
+        bool Update(BlogDto dto);
 
         /// <summary>
         /// 新增 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        void Add(BlogDto dto);
+        bool Add(BlogDto dto);
 
         /// <summary>
         /// 刪除 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>
-        void Remove(int id);
+        bool Remove(int id);
     }
 }
