@@ -22,6 +22,12 @@ namespace Sample.Service.Interface
         List<BlogDto> GetAll();
 
         /// <summary>
+        /// 取得特定數量 Blog
+        /// </summary>
+        /// <returns></returns>
+        List<BlogDto> GetRange(BlogQueryDto dto);
+
+        /// <summary>
         /// 更新 Blog
         /// </summary>
         /// <param name="dto">Blog Dto</param>

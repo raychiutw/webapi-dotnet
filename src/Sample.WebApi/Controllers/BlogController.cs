@@ -55,6 +55,22 @@ namespace Sample.WebApi.Controllers
             return viewModel;
         }
 
+        ///// <summary>
+        ///// 取得 Blog
+        ///// </summary>
+        ///// <param name="id">Blog Id</param>
+        ///// <returns></returns>
+        //[ResponseType(typeof(BlogViewModel))]
+        //[HttpGet]
+        //public List<BlogViewModel> GetAll()
+        //{
+        //    var dtos = this._blogService.GetAll();
+
+        //    var viewModels = this._mapper.Map<List<BlogViewModel>>(dtos);
+
+        //    return viewModels;
+        //}
+
         /// <summary>
         /// 取得 Blog
         /// </summary>
@@ -62,42 +78,15 @@ namespace Sample.WebApi.Controllers
         /// <returns></returns>
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
-        public List<BlogViewModel> GetAll()
+        public List<BlogViewModel> GetRange([FromUri]BlogQueryParameter parameter)
         {
-            var dtos = this._blogService.GetAll();
+            var query = this._mapper.Map<BlogQueryDto>(parameter);
 
-            var viewModels = this._mapper.Map<List<BlogViewModel>>(dtos);
+            var blogs = this._blogService.GetRange(query);
+
+            var viewModels = this._mapper.Map<List<BlogViewModel>>(blogs);
 
             return viewModels;
-        }
-
-        /// <summary>
-        /// 取得 Blog
-        /// </summary>
-        /// <param name="id">Blog Id</param>
-        /// <returns></returns>
-        [ResponseType(typeof(BlogViewModel))]
-        [HttpGet]
-        public List<BlogViewModel> GetRange(
-            [FromUri]int start,
-            [FromUri]int end)
-        {
-            var blogs = this._blogService.GetAll();
-
-            var models = new List<BlogViewModel>();
-
-            foreach (var blog in blogs)
-            {
-                var model = new BlogViewModel()
-                {
-                    BlogId = blog.BlogId,
-                    Url = blog.Url
-                };
-
-                models.Add(model);
-            }
-
-            return models;
         }
 
         /// <summary>

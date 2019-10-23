@@ -94,5 +94,28 @@ namespace Sample.Service.Implement
 
             this._blogRepository.Add(blog);
         }
+
+        /// <summary>
+        /// 取得特定數量 Blog
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public List<BlogDto> GetRange(BlogQueryDto dto)
+        {
+            var blogs = this._blogRepository.GetAll();
+
+            // 有帶起迄筆數的篩選
+            if (dto.Start > 0 || dto.End > 0)
+            {
+                var skipCount = dto.Start - 1;
+                var takeCount = dto.End - dto.Start + 1;
+
+                blogs = blogs.Skip(skipCount).Take(takeCount);
+            }
+
+            var dtos = this._mapper.Map<List<BlogDto>>(blogs);
+
+            return dtos;
+        }
     }
 }
