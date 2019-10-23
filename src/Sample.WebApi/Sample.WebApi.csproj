@@ -55,6 +55,18 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NanoProfiler, Version=2.1.0.2, Culture=neutral, PublicKeyToken=132fc11abeaff685, processorArchitecture=MSIL">
+      <HintPath>..\packages\NanoProfiler.2.1.0.2\lib\net40\NanoProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="NanoProfiler.Storages.Json, Version=2.1.0.2, Culture=neutral, PublicKeyToken=132fc11abeaff685, processorArchitecture=MSIL">
+      <HintPath>..\packages\NanoProfiler.Storages.Json.2.1.0.2\lib\net40\NanoProfiler.Storages.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NanoProfiler.Web, Version=2.1.0.2, Culture=neutral, PublicKeyToken=132fc11abeaff685, processorArchitecture=MSIL">
+      <HintPath>..\packages\NanoProfiler.Web.2.1.0.2\lib\net40\NanoProfiler.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="slf4net, Version=0.1.32.1, Culture=neutral, PublicKeyToken=592edb3b6b36b5ba, processorArchitecture=MSIL">
+      <HintPath>..\packages\slf4net.0.1.32.1\lib\net35\slf4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -194,6 +206,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ControllerProfile.cs" />
+    <Compile Include="Infrastructure\NanoProfilingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
