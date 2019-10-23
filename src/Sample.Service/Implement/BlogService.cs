@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using EF.Diagnostics.Profiling;
@@ -111,7 +112,11 @@ namespace Sample.Service.Implement
                 var blogs = this._blogRepository.GetAll();
 
                 // 有帶起迄筆數的篩選
-                if (dto.Start > 0 || dto.End > 0)
+                if (dto.Start < 0 || dto.End < 0)
+                {
+                    throw new Exception("起迄參數有為 0");
+                }
+                else
                 {
                     var skipCount = dto.Start - 1;
                     var takeCount = dto.End - dto.Start + 1;
