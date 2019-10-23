@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using AutoMapper;
 using Sample.Common.Dto;
+using Sample.Infrastructure;
 using Sample.Service.Interface;
 using Sample.WebApi.Controllers.Parameters;
 using Sample.WebApi.Controllers.ViewModels;
@@ -43,6 +44,7 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>
+        [NanoProfiling]
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
         [Route("{id}")]
@@ -76,6 +78,7 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>
+        [NanoProfiling(ProfilingName = "BlogController - GetRange")]
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
         public IEnumerable<BlogViewModel> GetRange([FromUri]BlogQueryParameter parameter)
@@ -94,6 +97,7 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="parameter">Blog 參數</param>
         /// <returns></returns>
+        [NanoProfiling]
         [HttpPost]
         public IHttpActionResult Add(BlogParameter parameter)
         {
@@ -114,6 +118,7 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>
+        [NanoProfiling]
         [HttpDelete]
         [Route("{id}")]
         public IHttpActionResult Remove(int id)
@@ -128,6 +133,7 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="parameter">Blog 參數</param>
         /// <returns></returns>
+        [NanoProfiling]
         [HttpPatch]
         public IHttpActionResult Update(BlogParameter parameter)
         {

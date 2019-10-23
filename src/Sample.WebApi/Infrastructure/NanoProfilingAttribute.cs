@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 using EF.Diagnostics.Profiling;
 
 namespace Sample.Infrastructure
 {
     /// <summary>
-    /// Class NanoProfilingAttribute.
+    /// NanoProfilingAttribute
     /// </summary>
-    /// <seealso cref="System.Web.Mvc.ActionFilterAttribute" />
+    /// <seealso cref="System.Web.Http.Filters.ActionFilterAttribute" />
     public class NanoProfilingAttribute : ActionFilterAttribute
     {
         /// <summary>
@@ -22,37 +23,21 @@ namespace Sample.Infrastructure
         /// <value>The profiling step.</value>
         public IDisposable ProfilingStep { get; set; }
 
-        /// <summary>
-        /// 在動作方法執行之前，由 ASP.NET MVC 架構呼叫。
-        /// </summary>
-        /// <param name="filterContext">篩選內容。</param>
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnActionExecuting(HttpActionContext context)
         {
-            base.OnActionExecuting(filterContext);
+            base.OnActionExecuting(context);
 
             if (string.IsNullOrWhiteSpace(this.ProfilingName))
             {
-                var controllerName = filterContext.RequestContext.RouteData.Values["controller"] == null
-                    ? string.Empty
-                    : filterContext.RequestContext.RouteData.Values["controller"].ToString().ToLower();
-
-                var actionName = filterContext.RequestContext.RouteData.Values["action"] == null
-                    ? string.Empty
-                    : filterContext.RequestContext.RouteData.Values["action"].ToString().ToLower();
-
-                this.ProfilingName = $"Web [controller : {controllerName}][action : {actionName}]";
+                this.ProfilingName = $"Web Controller Profilier";
             }
 
             this.ProfilingStep = ProfilingSession.Current.Step(this.ProfilingName);
         }
 
-        /// <summary>
-        /// 在動作方法執行之後，由 ASP.NET MVC 架構呼叫。
-        /// </summary>
-        /// <param name="filterContext">篩選內容。</param>
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuted(HttpActionExecutedContext actionContext)
         {
-            base.OnActionExecuted(filterContext);
+            base.OnActionExecuted(actionContext);
             this.ProfilingStep?.Dispose();
         }
     }

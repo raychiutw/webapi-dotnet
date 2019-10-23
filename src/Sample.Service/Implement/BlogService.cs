@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using EF.Diagnostics.Profiling;
 using Sample.Common.Dto;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
@@ -66,11 +67,14 @@ namespace Sample.Service.Implement
         /// <returns></returns>
         public IEnumerable<BlogDto> GetAll()
         {
-            var blogs = this._blogRepository.GetAll();
+            using (ProfilingSession.Current.Step($"{nameof(BlogService)} - {nameof(GetAll)}"))
+            {
+                var blogs = this._blogRepository.GetAll();
 
-            var dtos = this._mapper.Map<List<BlogDto>>(blogs);
+                var dtos = this._mapper.Map<List<BlogDto>>(blogs);
 
-            return dtos;
+                return dtos;
+            }
         }
 
         /// <summary>
@@ -102,20 +106,23 @@ namespace Sample.Service.Implement
         /// <returns></returns>
         public IEnumerable<BlogDto> GetRange(BlogQueryDto dto)
         {
-            var blogs = this._blogRepository.GetAll();
-
-            // 有帶起迄筆數的篩選
-            if (dto.Start > 0 || dto.End > 0)
+            using (ProfilingSession.Current.Step($"{nameof(BlogService)} - {nameof(GetRange)}"))
             {
-                var skipCount = dto.Start - 1;
-                var takeCount = dto.End - dto.Start + 1;
+                var blogs = this._blogRepository.GetAll();
 
-                blogs = blogs.Skip(skipCount).Take(takeCount);
+                // 有帶起迄筆數的篩選
+                if (dto.Start > 0 || dto.End > 0)
+                {
+                    var skipCount = dto.Start - 1;
+                    var takeCount = dto.End - dto.Start + 1;
+
+                    blogs = blogs.Skip(skipCount).Take(takeCount);
+                }
+
+                var dtos = this._mapper.Map<List<BlogDto>>(blogs);
+
+                return dtos;
             }
-
-            var dtos = this._mapper.Map<List<BlogDto>>(blogs);
-
-            return dtos;
         }
     }
 }

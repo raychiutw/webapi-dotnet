@@ -1,5 +1,7 @@
 ﻿using System.Data.Common;
 using System.Data.SqlClient;
+using EF.Diagnostics.Profiling;
+using EF.Diagnostics.Profiling.Data;
 
 namespace Sample.Repository.Infrastructure
 {
@@ -28,7 +30,13 @@ namespace Sample.Repository.Infrastructure
         {
             var connection = new SqlConnection(this._connectionString);
 
-            return connection;
+            if (ProfilingSession.Current == null)
+            {
+                return connection;
+            }
+
+            var dbProfiler = new DbProfiler(ProfilingSession.Current.Profiler);
+            return new ProfiledDbConnection(connection, dbProfiler);
         }
     }
 }

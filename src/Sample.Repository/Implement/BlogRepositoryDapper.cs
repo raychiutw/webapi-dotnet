@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dapper;
+using EF.Diagnostics.Profiling;
 using Sample.Repository.Infrastructure;
 using Sample.Repository.Interface;
 using Sample.Repository.Models;
@@ -70,14 +71,17 @@ namespace Sample.Repository.Implement
         /// <returns></returns>
         public IEnumerable<Blog> GetAll()
         {
-            var sql = @"SELECT BlogId, Url
+            using (ProfilingSession.Current.Step($"{nameof(BlogRepositoryDapper)} - {nameof(GetAll)}"))
+            {
+                var sql = @"SELECT BlogId, Url
                         FROM Blog WITH (NOLOCK)";
 
-            using (var connection = this._database.GetConnection())
-            {
-                var blogs = connection.Query<Blog>(sql);
+                using (var connection = this._database.GetConnection())
+                {
+                    var blogs = connection.Query<Blog>(sql);
 
-                return blogs;
+                    return blogs;
+                }
             }
         }
 
