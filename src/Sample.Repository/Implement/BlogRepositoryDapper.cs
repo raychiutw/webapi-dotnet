@@ -116,9 +116,9 @@ namespace Sample.Repository.Implement
         public bool Add(Blog blog)
         {
             var sql = @"INSERT INTO Blog
-                        (BlogId, Url)
+                        (Url)
                         VALUES
-                        (@Id, @Url)";
+                        (@Url)";
 
             using (var connection = this._database.GetConnection())
             {
@@ -126,7 +126,6 @@ namespace Sample.Repository.Implement
                      sql,
                      new
                      {
-                         Id = blog.BlogId,
                          Url = blog.Url
                      });
 

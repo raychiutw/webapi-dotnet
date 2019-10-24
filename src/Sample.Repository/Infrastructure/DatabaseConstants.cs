@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+﻿using System.Data;
 using System.Data.SqlClient;
 using EF.Diagnostics.Profiling;
 using EF.Diagnostics.Profiling.Data;
@@ -26,7 +26,7 @@ namespace Sample.Repository.Infrastructure
         /// 取得連線
         /// </summary>
         /// <returns></returns>
-        public DbConnection GetConnection()
+        public IDbConnection GetConnection()
         {
             var connection = new SqlConnection(this._connectionString);
 

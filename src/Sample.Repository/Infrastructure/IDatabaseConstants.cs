@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+﻿using System.Data;
 
 namespace Sample.Repository.Infrastructure
 {
@@ -11,6 +11,6 @@ namespace Sample.Repository.Infrastructure
         /// 取得連線
         /// </summary>
         /// <returns></returns>
-        DbConnection GetConnection();
+        IDbConnection GetConnection();
     }
 }
