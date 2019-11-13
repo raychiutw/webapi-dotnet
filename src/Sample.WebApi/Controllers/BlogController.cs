@@ -31,6 +31,7 @@ namespace Sample.WebApi.Controllers
         /// Initializes a new instance of the <see cref="BlogController"/> class.
         /// </summary>
         /// <param name="blogService">The blog service.</param>
+        /// <param name="mapper">The mapper.</param>
         public BlogController(
             IBlogService blogService,
             IMapper mapper)
@@ -76,7 +77,7 @@ namespace Sample.WebApi.Controllers
         /// <summary>
         /// 取得 Blog
         /// </summary>
-        /// <param name="id">Blog Id</param>
+        /// <param name="parameter">Blog Id</param>
         /// <returns></returns>
         [NanoProfiling(ProfilingName = "BlogController - GetRange")]
         [ResponseType(typeof(BlogViewModel))]
@@ -87,7 +88,7 @@ namespace Sample.WebApi.Controllers
 
             var blogs = this._blogService.GetRange(query);
 
-            var viewModels = this._mapper.Map<List<BlogViewModel>>(blogs);
+            var viewModels = this._mapper.Map<IEnumerable<BlogViewModel>>(blogs);
 
             return viewModels;
         }
