@@ -79,14 +79,14 @@ namespace Sample.WebApi.Controllers
         /// </summary>
         /// <param name="parameter">Blog Id</param>
         /// <returns></returns>
-        [NanoProfiling(ProfilingName = "BlogController - GetRange")]
+        [NanoProfiling(ProfilingName = "BlogController - GetRange1")]
         [ResponseType(typeof(BlogViewModel))]
         [HttpGet]
         public IEnumerable<BlogViewModel> GetRange([FromUri]BlogQueryParameter parameter)
         {
             var query = this._mapper.Map<BlogQueryDto>(parameter);
 
-            var blogs = this._blogService.GetRange(query);
+            var blogs = this._blogService.GetRange1(query);
 
             var viewModels = this._mapper.Map<IEnumerable<BlogViewModel>>(blogs);
 
@@ -115,7 +115,7 @@ namespace Sample.WebApi.Controllers
         }
 
         /// <summary>
-        /// 刪除 Blof
+        /// 刪除 Blog
         /// </summary>
         /// <param name="id">Blog Id</param>
         /// <returns></returns>

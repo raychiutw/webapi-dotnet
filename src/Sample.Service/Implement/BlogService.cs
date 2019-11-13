@@ -30,6 +30,7 @@ namespace Sample.Service.Implement
         /// Initializes a new instance of the <see cref="BlogService"/> class.
         /// </summary>
         /// <param name="bologRepository">The bolog repository.</param>
+        /// <param name="mapper">The mapper.</param>
         public BlogService(
             IBologRepository bologRepository,
             IMapper mapper)
