@@ -11,18 +11,34 @@ namespace Sample.Repository.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Blog
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Blog"/> class.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Blog()
         {
             this.Posts = new HashSet<Post>();
         }
-    
+
+        /// <summary>
+        /// Gets or sets the blog identifier.
+        /// </summary>
         public int BlogId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
         public string Url { get; set; }
-    
+
+        /// <summary>
+        /// Gets or sets the posts.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
     }

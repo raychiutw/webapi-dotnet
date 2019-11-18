@@ -42,7 +42,7 @@ namespace Sample.Service.Interface
         /// <summary>
         /// 刪除 Blog
         /// </summary>
-        /// <param name="dto">Blog Dto</param>
+        /// <param name="id">Blog Dto</param>
         bool Remove(int id);
     }
 }

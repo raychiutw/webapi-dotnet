@@ -12,20 +12,40 @@ namespace Sample.Repository.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="System.Data.Entity.DbContext" />
     public partial class BloggingEntities : DbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BloggingEntities"/> class.
+        /// </summary>
         public BloggingEntities()
             : base("name=BloggingEntities")
         {
         }
-    
+
+
+        /// <summary>
+        /// 此方法的呼叫時機是在初始化衍生內容的模型時，但在鎖定此模型及使用此模型初始化內容之前。此方法的預設實作不會做任何事，但是可以在衍生類別中覆寫它，以便可以進一步設定此模型然後再將它鎖定。
+        /// </summary>
+        /// <param name="modelBuilder">針對建立的內容定義模型的產生器。</param>
+        /// <exception cref="UnintentionalCodeFirstException"></exception>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        /// <summary>
+        /// Gets or sets the blogs.
+        /// </summary>
         public virtual DbSet<Blog> Blogs { get; set; }
+
+        /// <summary>
+        /// Gets or sets the posts.
+        /// </summary>
         public virtual DbSet<Post> Posts { get; set; }
     }
 }

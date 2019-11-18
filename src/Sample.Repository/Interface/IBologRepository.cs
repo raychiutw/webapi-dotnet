@@ -37,7 +37,7 @@ namespace Sample.Repository.Interface
         /// <summary>
         /// 刪除 Blog
         /// </summary>
-        /// <param name="blog">Blog Id</param>
+        /// <param name="id">Blog Id</param>
         bool Remove(int id);
     }
 }

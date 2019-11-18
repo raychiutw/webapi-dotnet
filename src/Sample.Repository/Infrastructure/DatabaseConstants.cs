@@ -8,7 +8,6 @@ namespace Sample.Repository.Infrastructure
     /// <summary>
     /// Database 介面
     /// </summary>
-    /// <seealso cref="Evertrust.Mail.Repository.Infrastructure.IDatabaseConstants" />
     public class DatabaseConstants : IDatabaseConstants
     {
         private readonly string _connectionString;
@@ -16,7 +15,7 @@ namespace Sample.Repository.Infrastructure
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseConstants"/> class.
         /// </summary>
-        /// <param name="database">The database.</param>
+        /// <param name="connectionString">The database.</param>
         public DatabaseConstants(string connectionString)
         {
             this._connectionString = connectionString;

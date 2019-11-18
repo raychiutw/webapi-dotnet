@@ -11,14 +11,35 @@ namespace Sample.Repository.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Post
     {
+        /// <summary>
+        /// Gets or sets the post identifier.
+        /// </summary>
         public int PostId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the blog identifier.
+        /// </summary>
         public int BlogId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
         public string Title { get; set; }
-    
+
+        /// <summary>
+        /// Gets or sets the blog.
+        /// </summary>
         public virtual Blog Blog { get; set; }
     }
 }

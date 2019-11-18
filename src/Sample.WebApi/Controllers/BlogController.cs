@@ -86,7 +86,7 @@ namespace Sample.WebApi.Controllers
         {
             var query = this._mapper.Map<BlogQueryDto>(parameter);
 
-            var blogs = this._blogService.GetRange1(query);
+            var blogs = this._blogService.GetRange(query);
 
             var viewModels = this._mapper.Map<IEnumerable<BlogViewModel>>(blogs);
 
